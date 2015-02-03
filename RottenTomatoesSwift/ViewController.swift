@@ -15,9 +15,12 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
-        cell.textLabel?.text = "Row \(indexPath.row)"
-        return cell
+        let movieCell = tableView.dequeueReusableCellWithIdentifier("MyMovieCell") as MovieTableViewCell
+        
+        movieCell.movieTitleLabel.text = "Movie \(indexPath.row)"
+        movieCell.synopsisLabel.text = "Synopsis \(indexPath.row)"
+        
+        return movieCell
     }
 }
 
