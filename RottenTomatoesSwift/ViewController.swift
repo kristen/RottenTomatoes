@@ -19,6 +19,8 @@ class ViewController: UITableViewController {
         let request = NSMutableURLRequest(URL: NSURL(string: RottenTomatoesURLString)!)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
+//            var errorValue: NSError? = nil // very bad person for not checking errorValue
+//            let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as NSDictionary
             var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
             self.moviesArray = responseDictionary["movies"] as NSArray
             self.tableView.reloadData()
@@ -35,6 +37,8 @@ class ViewController: UITableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let movieCell = tableView.dequeueReusableCellWithIdentifier("MyMovieCell") as MovieTableViewCell
         let movieDictionary = self.moviesArray![indexPath.row] as NSDictionary

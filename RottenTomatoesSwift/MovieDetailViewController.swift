@@ -12,7 +12,6 @@ class MovieDetailViewController: UIViewController {
 
     
     @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var synopsisLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var castLabel: UILabel!
@@ -21,8 +20,9 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        movieTitleLabel.text = movie?.title
+        navigationItem.title = movie?.title
         synopsisLabel.text = movie?.synopsis
+//        ratingLabel.text = movie?.rating
         castLabel.text = "blah cast"
         
         if let imageURL = movie?.imageURL {
