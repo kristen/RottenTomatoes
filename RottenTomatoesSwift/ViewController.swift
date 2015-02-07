@@ -12,11 +12,17 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var moviesTableView: UITableView!
     @IBOutlet weak var networkErrorLabel: UILabel!
-    var moviesArray: NSArray?
+    var refreshControl: UIRefreshControl!
+    var moviesArray: NSArray!
+    var networkError: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesTableView.rowHeight = 96
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchMovies", forControlEvents: UIControlEvents.ValueChanged)
+        moviesTableView.insertSubview(refreshControl, atIndex: 0)
         fetchMovies()
         
     }
@@ -24,6 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     func fetchMovies() {
         MBProgressHUD.showHUDAddedTo(view, animated: true)
         var networkErrorLabelHeight = networkErrorLabel.frame.height
+        var networkErrorYPosition = networkErrorLabel.center.y
         networkErrorLabel.alpha = 0.0
         
         let RottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=50&country=us"
@@ -32,21 +39,31 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
             if error == nil {
+                if self.networkError {
+                    UIView.animateWithDuration(0.4, delay: 3.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                        self.networkErrorLabel.alpha = 0.0
+                        self.networkErrorLabel.center.y = networkErrorYPosition - networkErrorLabelHeight
+                        }, completion: nil)
+                    self.networkError = false
+                }
                 var errorValue: NSError? = nil // very bad person for not checking errorValue
                 var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as NSDictionary
                 self.moviesArray = responseDictionary["movies"] as? NSArray
                 self.moviesTableView.reloadData()
+                self.refreshControl.endRefreshing()
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
             } else {
-                self.networkErrorLabel.center.y -= networkErrorLabelHeight
+                self.networkError = true
+                self.networkErrorLabel.center.y = networkErrorYPosition - networkErrorLabelHeight
                 UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-                    self.networkErrorLabel.alpha = 0.65
-                    self.networkErrorLabel.center.y += networkErrorLabelHeight
-                    }, completion: nil)
-                UIView.animateWithDuration(0.4, delay: 3.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                    self.networkErrorLabel.alpha = 0.0
-                    self.networkErrorLabel.center.y -= networkErrorLabelHeight
-                    }, completion: nil)
+                    self.networkErrorLabel.alpha = 1
+                    self.networkErrorLabel.center.y = networkErrorYPosition
+                    }, completion: { (finished) -> Void in
+                        if finished {
+                            self.refreshControl.endRefreshing()
+                            MBProgressHUD.hideHUDForView(self.view, animated: true)
+                        }
+                })
             }
         }
 
