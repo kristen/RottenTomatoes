@@ -11,19 +11,26 @@ import Foundation
 class Movie: NSObject {
     let title: String
     let synopsis: String
-//    let cast: NSArray
-//    let rating: String
+    let cast: [Cast]
+    let rating: Rating
     let imageURL: String
+    let mpaa_rating: String
 
     init(dictionary: NSDictionary) {
         self.title = dictionary["title"] as String
         self.synopsis = dictionary["synopsis"] as String
-//        self.cast = dictionary["abridged_cast"] as NSArray
+        self.cast = []
+        let abridged_cast = dictionary["abridged_cast"] as [NSDictionary]
+        for cast in abridged_cast {
+            self.cast.append(Cast(dictionary: cast))
+        }
         
-//        let ratings = dictionary["ratings"] as NSDictionary
-//        self.rating = ratings["critics_score"] as String
+        let ratings = dictionary["ratings"] as NSDictionary
+        self.rating = Rating(dictionary: ratings)
         
         let posters = dictionary["posters"] as NSDictionary
-        self.imageURL = posters["thumbnail"] as String
+        
+        self.imageURL = (posters["detailed"] as String).stringByReplacingOccurrencesOfString("_tmb.jpg", withString: "_ori.jpg", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        self.mpaa_rating = dictionary["mpaa_rating"] as String
     }
 }

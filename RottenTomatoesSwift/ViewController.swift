@@ -21,6 +21,7 @@ class ViewController: UITableViewController {
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
 //            var errorValue: NSError? = nil // very bad person for not checking errorValue
 //            let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as NSDictionary
+            
             var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
             self.moviesArray = responseDictionary["movies"] as NSArray
             self.tableView.reloadData()
