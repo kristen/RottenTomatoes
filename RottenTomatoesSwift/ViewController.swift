@@ -8,12 +8,14 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UIViewController, UITableViewDataSource {
     
+    @IBOutlet weak var moviesTableView: UITableView!
     var moviesArray: NSArray?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        moviesTableView.rowHeight = 96
         
         let RottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=20&country=us"
         let request = NSMutableURLRequest(URL: NSURL(string: RottenTomatoesURLString)!)
@@ -23,12 +25,12 @@ class ViewController: UITableViewController {
 //            let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as NSDictionary
             
             var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
-            self.moviesArray = responseDictionary["movies"] as NSArray
-            self.tableView.reloadData()
+            self.moviesArray = responseDictionary["movies"] as? NSArray
+            self.moviesTableView.reloadData()
         }
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let array = moviesArray {
             return array.count
         } else {
@@ -36,11 +38,11 @@ class ViewController: UITableViewController {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let movieCell = tableView.dequeueReusableCellWithIdentifier("MyMovieCell") as MovieTableViewCell
         let movieDictionary = self.moviesArray![indexPath.row] as NSDictionary
         let movie = Movie(dictionary: movieDictionary)
@@ -58,7 +60,7 @@ class ViewController: UITableViewController {
         
         if segue.identifier == "showDetailView" {
             let mdvc = segue.destinationViewController as MovieDetailViewController
-            if let selectedIndexPath = tableView.indexPathForSelectedRow() {
+            if let selectedIndexPath = moviesTableView.indexPathForSelectedRow() {
                 let movieDictionary = moviesArray![selectedIndexPath.row] as NSDictionary
                 let movie = Movie(dictionary: movieDictionary) as Movie
                 mdvc.movie = movie
