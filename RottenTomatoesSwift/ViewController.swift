@@ -11,22 +11,36 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet weak var networkErrorLabel: UILabel!
     var moviesArray: NSArray?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesTableView.rowHeight = 96
+        var networkErrorLabelHeight = networkErrorLabel.frame.height
+        networkErrorLabel.alpha = 0.0
         
-        let RottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=20&country=us"
+        let RottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=50&country=us"
+        
         let request = NSMutableURLRequest(URL: NSURL(string: RottenTomatoesURLString)!)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
-//            var errorValue: NSError? = nil // very bad person for not checking errorValue
-//            let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as NSDictionary
-            
-            var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
-            self.moviesArray = responseDictionary["movies"] as? NSArray
-            self.moviesTableView.reloadData()
+            if error == nil {
+                var errorValue: NSError? = nil // very bad person for not checking errorValue
+                var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as NSDictionary
+                self.moviesArray = responseDictionary["movies"] as? NSArray
+                self.moviesTableView.reloadData()
+            } else {
+                self.networkErrorLabel.center.y -= networkErrorLabelHeight
+                UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+                    self.networkErrorLabel.alpha = 0.65
+                    self.networkErrorLabel.center.y += networkErrorLabelHeight
+                }, completion: nil)
+                UIView.animateWithDuration(0.4, delay: 3.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                    self.networkErrorLabel.alpha = 0.0
+                    self.networkErrorLabel.center.y -= networkErrorLabelHeight
+                }, completion: nil)
+            }
         }
     }
 
