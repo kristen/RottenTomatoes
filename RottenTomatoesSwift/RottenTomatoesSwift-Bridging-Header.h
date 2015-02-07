@@ -10,5 +10,6 @@
 #define RottenTomatoesSwift_RottenTomatoesSwift_Bridging_Header_h
 
 #import <UIImageView+AFNetworking.h>
+#import <MBProgressHUD.h>
 
 #endif

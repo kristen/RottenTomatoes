@@ -17,6 +17,12 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesTableView.rowHeight = 96
+        fetchMovies()
+        
+    }
+    
+    func fetchMovies() {
+        MBProgressHUD.showHUDAddedTo(view, animated: true)
         var networkErrorLabelHeight = networkErrorLabel.frame.height
         networkErrorLabel.alpha = 0.0
         
@@ -30,18 +36,20 @@ class ViewController: UIViewController, UITableViewDataSource {
                 var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as NSDictionary
                 self.moviesArray = responseDictionary["movies"] as? NSArray
                 self.moviesTableView.reloadData()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
             } else {
                 self.networkErrorLabel.center.y -= networkErrorLabelHeight
                 UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
                     self.networkErrorLabel.alpha = 0.65
                     self.networkErrorLabel.center.y += networkErrorLabelHeight
-                }, completion: nil)
+                    }, completion: nil)
                 UIView.animateWithDuration(0.4, delay: 3.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                     self.networkErrorLabel.alpha = 0.0
                     self.networkErrorLabel.center.y -= networkErrorLabelHeight
-                }, completion: nil)
+                    }, completion: nil)
             }
         }
+
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
