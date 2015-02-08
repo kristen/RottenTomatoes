@@ -13,7 +13,8 @@ class Movie: NSObject {
     let synopsis: String
     let cast: [Cast]
     let rating: Rating
-    let imageURL: String
+    let loResImageURL: String
+    let hiResImageURL: String
     let mpaa_rating: String
 
     init(dictionary: NSDictionary) {
@@ -30,7 +31,8 @@ class Movie: NSObject {
         
         let posters = dictionary["posters"] as NSDictionary
         
-        self.imageURL = (posters["detailed"] as String).stringByReplacingOccurrencesOfString("_tmb.jpg", withString: "_ori.jpg", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        self.loResImageURL = posters["detailed"] as String
+        self.hiResImageURL = loResImageURL.stringByReplacingOccurrencesOfString("_tmb.jpg", withString: "_ori.jpg", options: NSStringCompareOptions.LiteralSearch, range: nil)
         self.mpaa_rating = dictionary["mpaa_rating"] as String
     }
 }

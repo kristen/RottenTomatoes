@@ -36,8 +36,8 @@ class MovieDetailViewController: UIViewController {
         let castString = NSArray(array: castList).componentsJoinedByString(", ")
         castLabel.text = "Cast: \(castString)"
 
-        let url = NSURL(string: movie.imageURL)
-        posterImageView.setImageWithURL(url)
-
+        let loResImageURLRequest = NSMutableURLRequest(URL: NSURL(string: movie.loResImageURL)!)
+        posterImageView.setImageWithURL(NSURL(string: movie.loResImageURL))
+        posterImageView.setImageWithURL(NSURL(string: self.movie.hiResImageURL), placeholderImage: posterImageView.image)
     }
 }

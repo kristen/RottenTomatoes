@@ -232,7 +232,6 @@
         <!--DVDs-->
         <scene sceneID="2OD-oM-VgR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NAN-aQ-Aue" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="rFa-Nv-ekv" customClass="DVDViewController" customModule="RottenTomatoesSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="P0O-F4-CIp"/>
@@ -314,6 +313,7 @@
                         <outlet property="networkErrorLabel" destination="m0y-5D-FOK" id="e76-cW-aQu"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NAN-aQ-Aue" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1080" y="760"/>
         </scene>
@@ -351,7 +351,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fdQ-Nj-rWb"/>
+        <segue reference="VF3-ee-3MM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.7803921568627451" green="0.85098039215686272" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

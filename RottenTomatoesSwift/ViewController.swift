@@ -96,8 +96,17 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         movieCell.movieTitleLabel.text = movie.title
         movieCell.synopsisLabel.text = movie.synopsis
-        let url = NSURL(string: movie.imageURL)
-        movieCell.posterImageView.setImageWithURL(url)
+        let url = NSURL(string: movie.loResImageURL)
+        
+        movieCell.posterImageView.setImageWithURLRequest(NSMutableURLRequest(URL: url!), placeholderImage: nil, success: { (request, response, loResImage) -> Void in
+            movieCell.posterImageView.image = loResImage
+            if (request != nil && response != nil) {
+                movieCell.posterImageView.alpha = 0.0
+                UIView.animateWithDuration(1.0, animations: { () -> Void in
+                    movieCell.posterImageView.alpha = 1.0
+                })
+            }
+            }, failure: nil)
         
         return movieCell
     }

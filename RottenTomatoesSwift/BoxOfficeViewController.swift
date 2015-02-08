@@ -11,7 +11,7 @@ import UIKit
 class BoxOfficeViewController: ViewController {
 
     override func viewDidLoad() {
-        self.rottenTomatoesURL = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=50&country=us"
+        self.rottenTomatoesURL = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=10&country=us"
         super.viewDidLoad()
     }
 }
