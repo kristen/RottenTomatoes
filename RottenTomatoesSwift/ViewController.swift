@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     var refreshControl: UIRefreshControl!
     var moviesArray: NSArray!
     var networkError: Bool = false
+    var rottenTomatoesURL: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,6 @@ class ViewController: UIViewController, UITableViewDataSource {
         refreshControl.addTarget(self, action: "fetchMovies", forControlEvents: UIControlEvents.ValueChanged)
         moviesTableView.insertSubview(refreshControl, atIndex: 0)
         fetchMovies()
-        
     }
     
     func fetchMovies() {
@@ -33,9 +33,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         var networkErrorYPosition = networkErrorLabel.center.y
         networkErrorLabel.alpha = 0.0
         
-        let RottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=50&country=us"
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: RottenTomatoesURLString)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: rottenTomatoesURL)!)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
             if error == nil {
