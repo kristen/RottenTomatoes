@@ -8,6 +8,8 @@
 
 import UIKit
 
+// http://paletton.com/#uid=74U0u0kqljxhvs5mjnAv6eLGe9t
+
 class ViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var moviesTableView: UITableView!
@@ -20,6 +22,13 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesTableView.rowHeight = 96
+        
+//        navigationController?.navigationBar.barTintColor = UIColor(red: 46/255.0, green: 0/255.0, blue: 49/255.0, alpha: 1.0)
+//        navigationController?.navigationBar.tintColor = UIColor(red: 199/255.0, green: 217/255.0, blue: 98/255.0, alpha: 1.0)
+
+//        navigationController?.navigationBar.translucent = false
+//        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 199/255.0, green: 217/255.0, blue: 98/255.0, alpha: 1.0)
+
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "fetchMovies", forControlEvents: UIControlEvents.ValueChanged)
@@ -83,6 +92,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         let movieCell = tableView.dequeueReusableCellWithIdentifier("MyMovieCell") as MovieTableViewCell
         let movieDictionary = self.moviesArray![indexPath.row] as NSDictionary
         let movie = Movie(dictionary: movieDictionary)
+
         
         movieCell.movieTitleLabel.text = movie.title
         movieCell.synopsisLabel.text = movie.synopsis
