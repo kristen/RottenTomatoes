@@ -16,6 +16,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        // Tab Bar
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.tintColor = UIColor(red: 199/255.0, green: 217/255.0, blue: 98/255.0, alpha: 1.0)
+        tabBarController.tabBar.barTintColor = UIColor(red: 46/255.0, green: 0/255.0, blue: 49/255.0, alpha: 1.0)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let dvdNavigationController = storyboard.instantiateViewControllerWithIdentifier("MyNavigationController") as UINavigationController
+        let dvdViewController = dvdNavigationController.topViewController as ViewController
+        dvdViewController.rottenTomatoesURL = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=50&country=us"
+        dvdNavigationController.navigationBar.topItem?.title = "DVD"
+        dvdNavigationController.tabBarItem.title = "DVD"
+        dvdNavigationController.tabBarItem.image = UIImage(named: "dvd-icon")
+        
+        let boxOfficeNavigationController = storyboard.instantiateViewControllerWithIdentifier("MyNavigationController") as UINavigationController
+        let boxOfficeViewController = boxOfficeNavigationController.topViewController as ViewController
+        boxOfficeViewController.rottenTomatoesURL = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=50&country=us"
+        boxOfficeNavigationController.navigationBar.topItem?.title = "Theaters"
+        boxOfficeNavigationController.tabBarItem.title = "Theaters"
+        boxOfficeNavigationController.tabBarItem.image = UIImage(named: "box-office-icon")
+        
+        tabBarController.viewControllers = [dvdNavigationController, boxOfficeNavigationController]
+        
+        window?.rootViewController = tabBarController
+        window?.backgroundColor = UIColor(red: 241/255.0, green: 241/255.0, blue: 241/255.0, alpha: 1.0)
+        window?.makeKeyAndVisible()
+        
         return true
     }
 

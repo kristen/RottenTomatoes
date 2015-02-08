@@ -10,8 +10,6 @@
 		7FCCB1B2E449F05261AAE256 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8CE91711E4AABF5C1D1150 /* libPods.a */; };
 		BB13AA021A85BC4B00FDBF02 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB13AA011A85BC4B00FDBF02 /* Rating.swift */; };
 		BB13AA041A85BD6B00FDBF02 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB13AA031A85BD6B00FDBF02 /* Cast.swift */; };
-		BB25ACDB1A86F2DF00308411 /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB25ACDA1A86F2DF00308411 /* BoxOfficeViewController.swift */; };
-		BB25ACDD1A86F2F900308411 /* DVDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB25ACDC1A86F2F900308411 /* DVDViewController.swift */; };
 		BB57AEF71A8125FE00A7A89F /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57AEF61A8125FE00A7A89F /* MovieTableViewCell.swift */; };
 		BB57AEF91A812B6900A7A89F /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57AEF81A812B6900A7A89F /* MovieDetailViewController.swift */; };
 		BB57AEFB1A812D0A00A7A89F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB57AEFA1A812D0A00A7A89F /* Movie.swift */; };
@@ -39,8 +37,6 @@
 		BB13AA011A85BC4B00FDBF02 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		BB13AA031A85BD6B00FDBF02 /* Cast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		BB1CB1171A8271B1009C8B57 /* RottenTomatoesSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RottenTomatoesSwift-Bridging-Header.h"; sourceTree = "<group>"; };
-		BB25ACDA1A86F2DF00308411 /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
-		BB25ACDC1A86F2F900308411 /* DVDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVDViewController.swift; sourceTree = "<group>"; };
 		BB57AEF61A8125FE00A7A89F /* MovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		BB57AEF81A812B6900A7A89F /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		BB57AEFA1A812D0A00A7A89F /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -109,8 +105,6 @@
 				BB739FB51A8085200067F1A9 /* ViewController.swift */,
 				BB57AEF81A812B6900A7A89F /* MovieDetailViewController.swift */,
 				BB57AEF61A8125FE00A7A89F /* MovieTableViewCell.swift */,
-				BB25ACDA1A86F2DF00308411 /* BoxOfficeViewController.swift */,
-				BB25ACDC1A86F2F900308411 /* DVDViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -314,8 +308,6 @@
 				BB57AEF91A812B6900A7A89F /* MovieDetailViewController.swift in Sources */,
 				BB13AA041A85BD6B00FDBF02 /* Cast.swift in Sources */,
 				BB739FB61A8085200067F1A9 /* ViewController.swift in Sources */,
-				BB25ACDB1A86F2DF00308411 /* BoxOfficeViewController.swift in Sources */,
-				BB25ACDD1A86F2F900308411 /* DVDViewController.swift in Sources */,
 				BB739FB41A8085200067F1A9 /* AppDelegate.swift in Sources */,
 				BB57AEF71A8125FE00A7A89F /* MovieTableViewCell.swift in Sources */,
 				BB57AEFB1A812D0A00A7A89F /* Movie.swift in Sources */,
