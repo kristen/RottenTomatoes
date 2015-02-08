@@ -21,6 +21,15 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="n1y-qg-DDS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="03e-ae-Ob1">
+                                    <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="barTintColor" red="0.28235294119999998" green="0.01176470588" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="zYS-5F-tet" id="f3C-ia-gmu"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MyMovieCell" rowHeight="96" id="G38-WI-ll0" customClass="MovieTableViewCell" customModule="RottenTomatoesSwift" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -85,6 +94,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Theaters" id="UZ9-WR-r1l"/>
                     <connections>
+                        <outlet property="movieSearchBar" destination="03e-ae-Ob1" id="KTq-Rf-agb"/>
                         <outlet property="moviesTableView" destination="n1y-qg-DDS" id="Ihm-fB-aOB"/>
                         <outlet property="networkErrorLabel" destination="hKx-A0-Dw5" id="Q3l-tb-1QO"/>
                     </connections>
@@ -245,6 +255,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="cxy-km-rHD">
+                                    <rect key="frame" x="-5" y="54" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="barTintColor" red="0.28235294119999998" green="0.01176470588" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MyMovieCell" rowHeight="96" id="PMQ-MO-q51" customClass="MovieTableViewCell" customModule="RottenTomatoesSwift" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -309,6 +325,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="DVDs" id="MQr-NT-Jqh"/>
                     <connections>
+                        <outlet property="movieSearchBar" destination="cxy-km-rHD" id="nQz-GR-ZuY"/>
                         <outlet property="moviesTableView" destination="xYZ-Vn-eNG" id="7Ub-dp-AT6"/>
                         <outlet property="networkErrorLabel" destination="m0y-5D-FOK" id="e76-cW-aQu"/>
                     </connections>
@@ -351,7 +368,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="VF3-ee-3MM"/>
+        <segue reference="fdQ-Nj-rWb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.7803921568627451" green="0.85098039215686272" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -10,18 +10,26 @@ import UIKit
 
 // http://paletton.com/#uid=74U0u0kqljxhvs5mjnAv6eLGe9t
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate//, UITableViewDelegate
+{
+
     
     @IBOutlet weak var moviesTableView: UITableView!
     @IBOutlet weak var networkErrorLabel: UILabel!
+    @IBOutlet weak var movieSearchBar: UISearchBar!
+    
     var refreshControl: UIRefreshControl!
-    var moviesArray: NSArray!
+    var moviesArray: [NSDictionary]!
+    var filteredMovies = [NSDictionary]()
     var networkError: Bool = false
     var rottenTomatoesURL: String!
+    var isFiltered: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesTableView.rowHeight = 96
+        movieSearchBar.delegate = self
+        movieSearchBar.placeholder = "Search"
         
 //        navigationController?.navigationBar.barTintColor = UIColor(red: 46/255.0, green: 0/255.0, blue: 49/255.0, alpha: 1.0)
 //        navigationController?.navigationBar.tintColor = UIColor(red: 199/255.0, green: 217/255.0, blue: 98/255.0, alpha: 1.0)
@@ -55,7 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource {
                 }
                 var errorValue: NSError? = nil // very bad person for not checking errorValue
                 var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as NSDictionary
-                self.moviesArray = responseDictionary["movies"] as? NSArray
+                self.moviesArray = responseDictionary["movies"] as? [NSDictionary]
                 self.moviesTableView.reloadData()
                 self.refreshControl.endRefreshing()
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
@@ -75,9 +83,31 @@ class ViewController: UIViewController, UITableViewDataSource {
         }
 
     }
+    
+//    #pragma mark - UISearchBarDelegate
 
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText as NSString).length == 0 {
+            isFiltered = false
+        } else {
+            isFiltered = true
+            self.filteredMovies = self.moviesArray.filter {( movieDict: NSDictionary) -> Bool in
+                let movie = Movie(dictionary: movieDict)
+                let stringMatch = movie.title.rangeOfString(searchText)
+                return stringMatch != nil
+            }
+        }
+        
+        moviesTableView.reloadData()
+    }
+    
+//    #pragma mark - UITableViewDataSource
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let array = moviesArray {
+        if isFiltered {
+            return filteredMovies.count
+        } else if let array = moviesArray {
             return array.count
         } else {
             return 0
@@ -90,9 +120,15 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let movieCell = tableView.dequeueReusableCellWithIdentifier("MyMovieCell") as MovieTableViewCell
-        let movieDictionary = self.moviesArray![indexPath.row] as NSDictionary
+        
+        var movieDictionary: NSDictionary
+        if isFiltered {
+            movieDictionary = self.filteredMovies[indexPath.row] as NSDictionary
+        } else {
+            movieDictionary = self.moviesArray![indexPath.row] as NSDictionary
+        }
+        
         let movie = Movie(dictionary: movieDictionary)
-
         
         movieCell.movieTitleLabel.text = movie.title
         movieCell.synopsisLabel.text = movie.synopsis
@@ -112,12 +148,18 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showDetailView" {
             let mdvc = segue.destinationViewController as MovieDetailViewController
             if let selectedIndexPath = moviesTableView.indexPathForSelectedRow() {
-                let movieDictionary = moviesArray![selectedIndexPath.row] as NSDictionary
+                var movieDictionary: NSDictionary
+                if isFiltered {
+                    movieDictionary = self.filteredMovies[selectedIndexPath.row] as NSDictionary
+                } else {
+                    movieDictionary = self.moviesArray![selectedIndexPath.row] as NSDictionary
+                }
                 let movie = Movie(dictionary: movieDictionary) as Movie
                 mdvc.movie = movie
             }
