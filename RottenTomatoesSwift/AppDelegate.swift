@@ -17,8 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        var maxFrame = UIScreen.mainScreen().bounds
-        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
         // Tab Bar
         let tabBarController = UITabBarController()
         tabBarController.tabBar.tintColor = UIColor(red: 199/255.0, green: 217/255.0, blue: 98/255.0, alpha: 1.0)
@@ -42,16 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabBarController.viewControllers = [dvdNavigationController, boxOfficeNavigationController]
         
-//        var maxFrame = UIScreen.mainScreen().bounds
-//        maxFrame.size.height -= dvdNavigationController.navigationBar.frame.height
-//        maxFrame.size.height -= tabBarController.tabBar.frame.height
-//        maxFrame.origin.y += dvdNavigationController.navigationBar.frame.height
-        
-        window = UIWindow(frame: maxFrame)
-        
         window?.rootViewController = tabBarController
         window?.backgroundColor = UIColor(red: 241/255.0, green: 241/255.0, blue: 241/255.0, alpha: 1.0)
         window?.makeKeyAndVisible()
+        
+//        
+//        application.statusBarHidden = false
+//        application.statusBarStyle = UIStatusBarStyle.LightContent
         
         return true
     }

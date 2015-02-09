@@ -77,11 +77,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
             }
         }
 
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        movieSearchBar.resignFirstResponder()
-    }
+    }    
     
     //    #pragma mark - UISearchBarDelegate
 
@@ -100,6 +96,12 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         
         moviesTableView.reloadData()
     }
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        movieSearchBar.resignFirstResponder()
+    }
+    
     
 //    #pragma mark - UITableViewDataSource
     
