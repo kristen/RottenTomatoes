@@ -30,17 +30,12 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         moviesTableView.rowHeight = 96
         movieSearchBar.delegate = self
         movieSearchBar.placeholder = "Search"
-        
-//        navigationController?.navigationBar.barTintColor = UIColor(red: 46/255.0, green: 0/255.0, blue: 49/255.0, alpha: 1.0)
-//        navigationController?.navigationBar.tintColor = UIColor(red: 199/255.0, green: 217/255.0, blue: 98/255.0, alpha: 1.0)
-
-//        navigationController?.navigationBar.translucent = false
-//        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: 199/255.0, green: 217/255.0, blue: 98/255.0, alpha: 1.0)
-
+        movieSearchBar.showsCancelButton = true
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "fetchMovies", forControlEvents: UIControlEvents.ValueChanged)
         moviesTableView.insertSubview(refreshControl, atIndex: 0)
+        view.sendSubviewToBack(moviesTableView)
         fetchMovies()
     }
     
@@ -84,7 +79,11 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
 
     }
     
-//    #pragma mark - UISearchBarDelegate
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        movieSearchBar.resignFirstResponder()
+    }
+    
+    //    #pragma mark - UISearchBarDelegate
 
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {

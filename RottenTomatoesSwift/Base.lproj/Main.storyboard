@@ -18,14 +18,17 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="⚠️ Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKx-A0-Dw5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚠️ Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKx-A0-Dw5">
                                 <rect key="frame" x="0.0" y="64" width="320" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.65000000000000002" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="3s6-gC-t6n"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="n1y-qg-DDS">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="n1y-qg-DDS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="03e-ae-Ob1">
@@ -91,6 +94,15 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="n1y-qg-DDS" firstAttribute="bottom" secondItem="tJE-2Z-cDU" secondAttribute="top" id="307-dN-fpV"/>
+                            <constraint firstItem="hKx-A0-Dw5" firstAttribute="top" secondItem="YQi-Z6-Ly4" secondAttribute="bottom" id="aD3-Dp-CX1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="n1y-qg-DDS" secondAttribute="trailing" constant="-16" id="cut-wn-Fjf"/>
+                            <constraint firstItem="n1y-qg-DDS" firstAttribute="top" secondItem="YQi-Z6-Ly4" secondAttribute="bottom" constant="-64" id="elh-I9-FcH"/>
+                            <constraint firstItem="n1y-qg-DDS" firstAttribute="leading" secondItem="3eF-BV-J83" secondAttribute="leadingMargin" constant="-16" id="glo-bQ-rpu"/>
+                            <constraint firstItem="n1y-qg-DDS" firstAttribute="leading" secondItem="hKx-A0-Dw5" secondAttribute="leading" id="utF-wD-zyk"/>
+                            <constraint firstItem="n1y-qg-DDS" firstAttribute="trailing" secondItem="hKx-A0-Dw5" secondAttribute="trailing" id="vyk-BE-22A"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UZ9-WR-r1l"/>
                     <connections>
@@ -116,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synopsis" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8N-Mz-ncQ">
-                                <rect key="frame" x="16" y="320" width="288" height="191"/>
+                                <rect key="frame" x="16" y="320" width="288" height="240"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

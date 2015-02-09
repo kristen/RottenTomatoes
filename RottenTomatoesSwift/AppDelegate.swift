@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        var maxFrame = UIScreen.mainScreen().bounds
         
         // Tab Bar
         let tabBarController = UITabBarController()
@@ -41,6 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         boxOfficeNavigationController.tabBarItem.image = UIImage(named: "box-office-icon")
         
         tabBarController.viewControllers = [dvdNavigationController, boxOfficeNavigationController]
+        
+//        var maxFrame = UIScreen.mainScreen().bounds
+//        maxFrame.size.height -= dvdNavigationController.navigationBar.frame.height
+//        maxFrame.size.height -= tabBarController.tabBar.frame.height
+//        maxFrame.origin.y += dvdNavigationController.navigationBar.frame.height
+        
+        window = UIWindow(frame: maxFrame)
         
         window?.rootViewController = tabBarController
         window?.backgroundColor = UIColor(red: 241/255.0, green: 241/255.0, blue: 241/255.0, alpha: 1.0)
