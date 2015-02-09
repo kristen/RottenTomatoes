@@ -22,6 +22,7 @@ Time spent: 24
 - [x] Add a tab bar for Box Office and DVD.
 - [x] Add a search bar: pretty simple implementation of searching against the existing table view data.
 - [x] Add app icons
+- [x] Change status bar color
 
 ### Walkthrough
 ![Video Walkthrough](rotten-tomatoes.gif)

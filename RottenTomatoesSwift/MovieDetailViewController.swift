@@ -9,8 +9,6 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
-
-    
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var synopsisLabel: UILabel!
     @IBOutlet weak var castLabel: UILabel!

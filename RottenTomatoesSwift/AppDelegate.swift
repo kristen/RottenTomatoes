@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
         // Tab Bar
         let tabBarController = UITabBarController()
         tabBarController.tabBar.tintColor = UIColor(red: 199/255.0, green: 217/255.0, blue: 98/255.0, alpha: 1.0)
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
+        // DVD Tab
         let dvdNavigationController = storyboard.instantiateViewControllerWithIdentifier("MyNavigationController") as UINavigationController
         let dvdViewController = dvdNavigationController.topViewController as ViewController
         dvdViewController.rottenTomatoesURL = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=50&country=us"
@@ -32,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dvdNavigationController.tabBarItem.title = "DVD"
         dvdNavigationController.tabBarItem.image = UIImage(named: "dvd-icon")
         
+        // Movies Tab
         let boxOfficeNavigationController = storyboard.instantiateViewControllerWithIdentifier("MyNavigationController") as UINavigationController
         let boxOfficeViewController = boxOfficeNavigationController.topViewController as ViewController
         boxOfficeViewController.rottenTomatoesURL = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=ws32mxpd653h5c8zqfvksxw9&limit=50&country=us"
@@ -39,15 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         boxOfficeNavigationController.tabBarItem.title = "Theaters"
         boxOfficeNavigationController.tabBarItem.image = UIImage(named: "box-office-icon")
         
+        // Add to Tab bar
         tabBarController.viewControllers = [dvdNavigationController, boxOfficeNavigationController]
         
         window?.rootViewController = tabBarController
         window?.backgroundColor = UIColor(red: 241/255.0, green: 241/255.0, blue: 241/255.0, alpha: 1.0)
         window?.makeKeyAndVisible()
-        
-//        
-//        application.statusBarHidden = false
-//        application.statusBarStyle = UIStatusBarStyle.LightContent
         
         return true
     }
